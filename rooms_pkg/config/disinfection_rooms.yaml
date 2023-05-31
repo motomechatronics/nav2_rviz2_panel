@@ -1,0 +1,144 @@
+rooms:
+- id: office
+  initial_pose:
+    orientation:
+      w: 1.0
+      z: 0.0
+    position:
+      x: 0.0
+      y: 0.0
+  name: Akara office
+  waypoints:
+  - id: 1
+    note: First waypoint
+    orientation:
+      w: 1.0
+      z: 0.0
+    position:
+      x: 1.0
+      y: 0.0
+  - id: 2
+    note: Second waypoint
+    orientation:
+      w: 1.0
+      z: 0.0
+    position:
+      x: 2.0
+      y: 0.0
+- room1:
+    id: 1
+    initial_pose:
+      orientation:
+        w: 0
+        x: 0
+      position:
+        x: 0
+        y: 0
+    name: Sala 1
+    routes:
+      route1:
+        name: Primo percorso
+        waypoints:
+          waypoint1:
+            angle: 0
+            time: 10
+          waypoint2:
+            angle: 90
+            time: 20
+    waypoints:
+      waypoint1:
+        id: 1
+        note: Primo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 1
+          y: 1
+      waypoint2:
+        id: 2
+        note: Secondo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 2
+          y: 2
+- room1:
+    id: 1
+    initial_pose:
+      orientation:
+        w: 0
+        x: 0
+      position:
+        x: 0
+        y: 0
+    name: Sala 1
+    routes:
+      route1:
+        name: Primo percorso
+        waypoints:
+          waypoint1:
+            angle: 0
+            time: 10
+          waypoint2:
+            angle: 90
+            time: 20
+    waypoints:
+      waypoint1:
+        id: 1
+        note: Primo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 1
+          y: 1
+      waypoint2:
+        id: 2
+        note: Secondo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 2
+          y: 2
+- room1:
+    id: 1
+    initial_pose:
+      orientation:
+        w: 0
+        x: 0
+      position:
+        x: 0
+        y: 0
+    name: Sala 1
+    routes:
+      route1:
+        name: Primo percorso
+        waypoints:
+          waypoint1:
+            angle: 0
+            time: 10
+          waypoint2:
+            angle: 90
+            time: 20
+    waypoints:
+      waypoint1:
+        id: 1
+        note: Primo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 1
+          y: 1
+      waypoint2:
+        id: 2
+        note: Secondo waypoint
+        orientation:
+          w: 0
+          x: 0
+        position:
+          x: 2
+          y: 2

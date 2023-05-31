@@ -1,0 +1,5 @@
+string room   # room to disinfect
+int32 route  # disinfection route            
+---
+string output  # mission output
+bool success   
