@@ -26,11 +26,7 @@ class NavRoutesVisualizationClient(Node):
 def main(args=None):
     rclpy.init(args=args)
     client = NavRoutesVisualizationClient()
-<<<<<<< HEAD
     client.send_request('office', 1)
-=======
-
->>>>>>> refs/remotes/origin/main
     rclpy.shutdown()
 
 if __name__ == '__main__':
