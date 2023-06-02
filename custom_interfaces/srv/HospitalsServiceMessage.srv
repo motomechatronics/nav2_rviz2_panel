@@ -1,0 +1,4 @@
+# empty request
+---
+string hospitals_dict  # hospitals dictionary
+bool success   

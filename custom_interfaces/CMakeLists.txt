@@ -25,6 +25,7 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/NavroutesServiceMessage.srv"
+  "srv/HospitalsServiceMessage.srv"
 )
 
 ament_package()
