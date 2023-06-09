@@ -1,0 +1,9 @@
+<library path="libnavroutes_panel">
+    <class name="navroutes_panel/NavroutesPanel"
+           type="navroutes_panel::NavroutesPanel"
+           base_class_type="rviz_common::Panel">
+        <description>
+            navroutes_panel
+        </description>
+    </class>
+</library>

@@ -1,4 +1,5 @@
 # empty request
 ---
-string hospitals_dict  # hospitals dictionary
-bool success   
+# hospitals dictionary
+string encoded_dict
+bool success
