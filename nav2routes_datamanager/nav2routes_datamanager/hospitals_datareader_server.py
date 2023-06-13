@@ -111,3 +111,27 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+
+"""
+
+{'st_james': 
+	{'delivery':
+		 {'room_id': 'room8_011', 
+		'room_name': 'The Akara Office8', 
+		'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/delivery.yaml', 
+		'nav_routes': {'Clean bed': [0], 'Clean bins': [1], 'Test': [2]}}, 
+	
+	'chemotherapy':
+		 {'room_id': 'room7_010', 
+		'room_name': 'The Akara Office7',
+		 'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/chemotherapy.yaml',
+		 'nav_routes': {'Clean bed': [0], 'Clean bins': [1], 'Test': [2]}},
+	
+	'orthopedic': {'room_id': 'room9_012',
+		 'room_name': 'The Akara Office9',
+		 'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/orthopedic.yaml', 
+		'nav_routes': {'Clean bed9': [0], 'Clean bins9': [1], 'Test9': [2]}}},
+
+}
+"""

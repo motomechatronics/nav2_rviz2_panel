@@ -12,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/meshes', glob('meshes/*.*')),
+        ('share/' + package_name + '/config', glob('config/*.yaml')),
         ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
@@ -37,6 +38,7 @@ setup(
             'navroutes_visualization_exe = rooms_pkg.navroutes_visualization:main',
             'navroutes_visualization_server_exe = rooms_pkg.navroutes_visualization_server:main',
             'navroutes_visualization_client_exe = rooms_pkg.navroutes_visualization_client:main',
+            'navroutes_manager_exe = rooms_pkg.navroutes_manager:main',
         ],
     },
 )

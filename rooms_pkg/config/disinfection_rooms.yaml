@@ -1,144 +1,97 @@
 rooms:
-- id: office
+  room_id: "office"
+  room_name: "The Akara Office"
+
   initial_pose:
-    orientation:
-      w: 1.0
-      z: 0.0
     position:
-      x: 0.0
-      y: 0.0
-  name: Akara office
-  waypoints:
-  - id: 1
-    note: First waypoint
+      x: -4.0
+      y: -4.0
     orientation:
-      w: 1.0
-      z: 0.0
-    position:
-      x: 1.0
-      y: 0.0
-  - id: 2
-    note: Second waypoint
-    orientation:
-      w: 1.0
-      z: 0.0
-    position:
-      x: 2.0
-      y: 0.0
-- room1:
-    id: 1
-    initial_pose:
-      orientation:
-        w: 0
-        x: 0
+      z: -0.0
+      w: 0.999999
+
+  points:
+    1:
       position:
-        x: 0
-        y: 0
-    name: Sala 1
-    routes:
-      route1:
-        name: Primo percorso
-        waypoints:
-          waypoint1:
-            angle: 0
-            time: 10
-          waypoint2:
-            angle: 90
-            time: 20
-    waypoints:
-      waypoint1:
-        id: 1
-        note: Primo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 1
-          y: 1
-      waypoint2:
-        id: 2
-        note: Secondo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 2
-          y: 2
-- room1:
-    id: 1
-    initial_pose:
+        x: -0.9665021896362305
+        y: -3.013331651687622
       orientation:
-        w: 0
-        x: 0
+        z: -0.9999520914852454
+        w: 0.009788500103853548
+      notes: ""
+    2:
       position:
-        x: 0
-        y: 0
-    name: Sala 1
-    routes:
-      route1:
-        name: Primo percorso
-        waypoints:
-          waypoint1:
-            angle: 0
-            time: 10
-          waypoint2:
-            angle: 90
-            time: 20
-    waypoints:
-      waypoint1:
-        id: 1
-        note: Primo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 1
-          y: 1
-      waypoint2:
-        id: 2
-        note: Secondo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 2
-          y: 2
-- room1:
-    id: 1
-    initial_pose:
+        x: -3.734679937362671
+        y: -2.863548994064331
       orientation:
-        w: 0
-        x: 0
+        z: -0.999717619018245
+        w: 0.023763043249784895
+      notes: ""
+    3:
       position:
-        x: 0
-        y: 0
-    name: Sala 1
-    routes:
-      route1:
-        name: Primo percorso
-        waypoints:
-          waypoint1:
-            angle: 0
-            time: 10
-          waypoint2:
-            angle: 90
-            time: 20
-    waypoints:
-      waypoint1:
-        id: 1
-        note: Primo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 1
-          y: 1
-      waypoint2:
-        id: 2
-        note: Secondo waypoint
-        orientation:
-          w: 0
-          x: 0
-        position:
-          x: 2
-          y: 2
+        x: -1.0
+        y: -1.0
+      orientation:
+        z: -0.0
+        w: 0.999999
+      notes: ""
+    4:
+      position:
+        x: -10.526981353759766
+        y: -3.1259894371032715
+      orientation:
+        z: 0.94170586300829
+        w: 0.3364373159680889
+      notes: ""
+    5:
+      position:
+        x: -5.07669014637050212
+        y: 0.024740481280914835
+      orientation:
+        z: 0.5500529142492617
+        w: 0.8351298051955123
+      notes: ""
+    6:
+      position:
+        x: -2.0
+        y: -2.0
+      orientation:
+        z: -0.0
+        w: 0.999999
+      notes: ""
+    7:
+      position:
+        x: 0.07669014637050212
+        y: 0.024740481280914835
+      orientation:
+        z: 0.5500529142492617
+        w: 0.8351298051955123
+      notes: ""
+    8:
+      position:
+        x: -2.0
+        y: -4.0
+      orientation:
+        z: -0.0
+        w: 0.999999
+
+  # nav_route_names: {route0: "Clean bed", route1: "Clean bins"}
+  nav_routes:
+    0: 
+      points:
+        1: [[-4.71,5], [-4.71,5],[3.14,10]]
+        3: [[-4.71,5], [-4.71,5]]
+        2: [[-4.71,5], [-4.71,5]]
+      route_name: "Clean bed"
+    1:
+      points: 
+        1: [[-4.71,5], [-4.71,5],[-4.71,10]]
+        3: [[-4.71,5], [-4.71,5]]
+      route_name: "Clean bins"
+    2:
+      points:  
+        5: [[-1.571,5.1], [-4.712,5.2]]
+        6: [[-4.712,5.3], [-1.57,5.4]]
+        7: [[-1.573,5.5], [-4.713,5.6]]
+        8: [[-1.574,5.7], [-4.714,5.8]]
+      route_name: "Test"

@@ -1,4 +1,9 @@
 import rclpy
+import os
+import pkgutil
+import yaml
+import math
+from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from rclpy.clock import Clock
 from visualization_msgs.msg import MarkerArray, Marker
@@ -7,8 +12,7 @@ from builtin_interfaces.msg import Duration
 from tf_transformations import quaternion_from_euler
 from custom_interfaces.srv import NavroutesServiceMessage
 from geometry_msgs.msg import Point
-import yaml
-import math
+
 
 class NavRoutesVisualizationServer(Node):
     def __init__(self):
@@ -22,8 +26,12 @@ class NavRoutesVisualizationServer(Node):
         self.phase_texts_background_pub = self.create_publisher(MarkerArray,'/phase_texts_background',10)  
         self.routes_pub = self.create_publisher(MarkerArray,'/routes',10) #//marker_route_array
         self.route_directions_pub = self.create_publisher(MarkerArray,'/route_directions',10) # /marker_route_direction_array         
-          
-      
+        # set the package that contains the hospitals data
+        self.package_name = "nav2routes_datamanager"
+        self.get_logger().info(self.package_name)
+        self.package_path = get_package_share_directory(self.package_name) + "/config/hospitals"
+        self.get_logger().info(self.package_path)
+
     def delete_old_markers(self):
         self.get_logger().info("old markers deleting...")
         # Delete previous markers by publishing an empty MarkerArray
@@ -43,8 +51,8 @@ class NavRoutesVisualizationServer(Node):
     def visualize_route_callback(self,request,response):
         self.delete_old_markers()
         self.get_logger().info("request received...")
-        room = request.room             
-        rooms = self.get_yaml_file() 
+        room_path = request.room  # it is the path of the room as: /home/user/ros2_ws/src/rooms_pkg/config/office_points.yaml
+        rooms = self.get_yaml_file(room_path) # have to became rooms = self.get_yaml_file(room) 
         self.route_id = request.route  
         if self.route_id in rooms['nav_routes']:            
             self.publish_waypoints(rooms,self.route_id)
@@ -64,10 +72,16 @@ class NavRoutesVisualizationServer(Node):
 
         self.get_logger().info("response sent...")
         return response
+    
+    # def get_yaml(self,hospital,room): 
+    #     # hospital data path       
+    #     package_path = get_package_share_directory(self.package_name) + "/config/hospitals" + hospital + room
+    #     with open(package_path, 'r') as file:
+    #         rooms = yaml.safe_load(file)['rooms']
+    #     return rooms
 
-
-    def get_yaml_file(self):
-        with open('/home/user/ros2_ws/src/rooms_pkg/config/office_points.yaml', 'r') as file:
+    def get_yaml_file(self, path):
+        with open(path, 'r') as file:
             rooms = yaml.safe_load(file)['rooms']
         return rooms
 

@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="schema_client_server.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:lockguides="true"
+     inkscape:zoom="0.98520767"
+     inkscape:cx="220.76564"
+     inkscape:cy="680.56717"
+     inkscape:window-width="1846"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path49738" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4-2-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7-1-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-4-2-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-7-1-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path49738-9" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g40074"
+       transform="matrix(0.78708396,0,0,0.78708396,5.2967887,95.269894)">
+      <g
+         id="g40067">
+        <g
+           id="g40061">
+          <rect
+             style="fill:#dffaf9;stroke:#000000;stroke-width:0.23301"
+             id="rect846"
+             width="82.405914"
+             height="26.92485"
+             x="19.953499"
+             y="24.704912" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="25.932796"
+             y="39.276314"
+             id="text3064"><tspan
+               sodipodi:role="line"
+               id="tspan3062"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               x="25.932796"
+               y="39.276314">nav2routes_datamanager_server</tspan></text>
+        </g>
+      </g>
+    </g>
+    <rect
+       style="fill:#ffff00;stroke:#000000;stroke-width:0.229416"
+       id="rect846-9"
+       width="101.71457"
+       height="21.146099"
+       x="47.824455"
+       y="56.235939" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.33199px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.208249"
+       x="73.728424"
+       y="67.681839"
+       id="text3064-8"><tspan
+         sodipodi:role="line"
+         id="tspan3062-4"
+         style="font-size:3.33199px;stroke-width:0.208249"
+         x="73.728424"
+         y="67.681839">nav2routes_data_panel_client</tspan></text>
+    <g
+       id="g45130-8"
+       transform="translate(81.843196,34.574567)">
+      <rect
+         style="fill:#00ff00;stroke:#000000;stroke-width:0.183398"
+         id="rect846-9-1"
+         width="64.860374"
+         height="21.192118"
+         x="32.678883"
+         y="80.140167" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.33199px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.208249"
+         x="37.385094"
+         y="91.609085"
+         id="text3064-8-0"><tspan
+           sodipodi:role="line"
+           id="tspan3062-4-3"
+           style="font-size:3.33199px;stroke-width:0.208249"
+           x="37.385094"
+           y="91.609085">nav2routes_datadisplay_server</tspan></text>
+    </g>
+    <g
+       id="g49338"
+       transform="translate(-0.65171877,73.386075)">
+      <rect
+         style="fill:#ffaaaa;stroke:#000000;stroke-width:0.183398"
+         id="rect846-9-1-4"
+         width="64.860374"
+         height="21.192118"
+         x="115.1738"
+         y="94.085144" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.33199px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.208249"
+         x="144.00517"
+         y="105.94697"
+         id="text3064-8-0-4"><tspan
+           sodipodi:role="line"
+           id="tspan3062-4-3-4"
+           style="font-size:3.33199px;stroke-width:0.208249"
+           x="144.00517"
+           y="105.94697">RViz</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 146.95227,138.5598 v 25.78346"
+       id="path49653" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-2)"
+       d="M 52.524915,166.26466 V 140.4812"
+       id="path49653-61" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="154.92264"
+       y="152.35243"
+       id="text53129"><tspan
+         sodipodi:role="line"
+         id="tspan53127"
+         style="stroke-width:0.264583"
+         x="154.92264"
+         y="152.35243">- routine</tspan></text>
+    <g
+       id="g100584"
+       transform="rotate(-0.6,-2870.6056,-4175.5671)">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-4)"
+         d="m 101.02606,114.20348 v 25.78346"
+         id="path49653-6" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-4-2)"
+         d="M 92.950762,140.69554 V 114.91208"
+         id="path49653-6-7" />
+    </g>
+    <g
+       id="g100584-8"
+       transform="rotate(179.4,76.993011,111.19527)">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-4-6)"
+         d="m 101.02606,114.20348 v 25.78346"
+         id="path49653-6-89" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-4-2-4)"
+         d="M 92.950762,140.69554 V 114.91208"
+         id="path49653-6-7-7" />
+    </g>
+    <g
+       id="g83745"
+       transform="matrix(1,0,0,0.9638895,-5.4659716,-30.648985)">
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.59412"
+         y="127.56001"
+         id="text53129-3"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1"
+           style="stroke-width:0.264583"
+           x="155.59412"
+           y="127.56001">- route_id</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.85249"
+         y="134.82043"
+         id="text53129-3-7"
+         inkscape:transform-center-x="6.1201372"
+         inkscape:transform-center-y="0.31995918"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1-5"
+           style="stroke-width:0.264583"
+           x="155.85249"
+           y="134.82043">- yaml_file_path</tspan></text>
+    </g>
+    <g
+       id="g83745-7"
+       transform="matrix(1,0,0,0.9638895,-128.89009,30.618705)">
+      <g
+         id="g191305"
+         transform="translate(1.6674594,-4.2456423)">
+        <path
+           id="rect126495"
+           style="fill:none;stroke:#000000;stroke-width:1.37953;stroke-miterlimit:4;stroke-dasharray:none"
+           d="m 118.95898,661.57617 v 22.59571 231.0332 H 326.55273 V 684.17188 H 207.64062 v -22.59571 z"
+           transform="matrix(0.26458333,0,0,0.2744955,121.7172,-31.941007)" />
+        <text
+           xml:space="preserve"
+           style="font-size:3.74495px;line-height:1.25;font-family:sans-serif;stroke-width:0.234059"
+           x="159.30554"
+           y="151.20166"
+           id="text131865"
+           transform="scale(0.98177877,1.0185594)"><tspan
+             sodipodi:role="line"
+             id="tspan131863"
+             style="stroke-width:0.234059"
+             x="159.30554"
+             y="151.20166">hospitals</tspan></text>
+        <g
+           id="g156669"
+           transform="translate(-1.206518,-0.17430935)">
+          <text
+             xml:space="preserve"
+             style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+             x="158.53937"
+             y="167.36888"
+             id="text53129-3-6"
+             transform="scale(0.99914294,1.0008578)"><tspan
+               sodipodi:role="line"
+               id="tspan53127-1-4"
+               style="stroke-width:0.140938"
+               x="158.53937"
+               y="167.36888">- room1.yaml</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+             x="158.53937"
+             y="170.24519"
+             id="text53129-3-6-9"
+             transform="scale(0.99914294,1.0008578)"><tspan
+               sodipodi:role="line"
+               id="tspan53127-1-4-8"
+               style="stroke-width:0.140938"
+               x="158.53937"
+               y="170.24519">- room2.yaml</tspan></text>
+          <path
+             id="rect126495-0"
+             style="fill:none;stroke:#000000;stroke-width:0.121222;stroke-miterlimit:4;stroke-dasharray:none"
+             d="m 157.5591,160.07444 v 1.35487 13.85303 h 26.73281 l 0.0978,-11.99681 -15.41065,0.004 v -3.21534 z"
+             sodipodi:nodetypes="cccccccc" />
+          <text
+             xml:space="preserve"
+             style="font-size:2.22563px;line-height:1.25;font-family:sans-serif;stroke-width:0.139102"
+             x="164.24686"
+             y="156.85286"
+             id="text131865-9"
+             transform="scale(0.96464965,1.0366458)"><tspan
+               sodipodi:role="line"
+               id="tspan131863-2"
+               style="stroke-width:0.139102"
+               x="164.24686"
+               y="156.85286">hospital1</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+             x="158.53937"
+             y="173.12154"
+             id="text53129-3-6-7"
+             transform="scale(0.99914294,1.0008578)"><tspan
+               sodipodi:role="line"
+               id="tspan53127-1-4-2"
+               style="stroke-width:0.140938"
+               x="158.53937"
+               y="173.12154">- room3.yaml</tspan></text>
+        </g>
+        <g
+           id="g156669-9"
+           transform="translate(-1.206518,18.593568)">
+          <text
+             xml:space="preserve"
+             style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+             x="158.53937"
+             y="167.36888"
+             id="text53129-3-6-96"
+             transform="scale(0.99914294,1.0008578)"><tspan
+               sodipodi:role="line"
+               id="tspan53127-1-4-0"
+               style="stroke-width:0.140938"
+               x="158.53937"
+               y="167.36888">- room4.yaml</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+             x="158.53937"
+             y="170.24519"
+             id="text53129-3-6-9-2"
+             transform="scale(0.99914294,1.0008578)"><tspan
+               sodipodi:role="line"
+               id="tspan53127-1-4-8-7"
+               style="stroke-width:0.140938"
+               x="158.53937"
+               y="170.24519">- room5.yaml</tspan></text>
+          <path
+             id="rect126495-0-6"
+             style="fill:none;stroke:#000000;stroke-width:0.121222;stroke-miterlimit:4;stroke-dasharray:none"
+             d="m 157.5591,160.07444 v 1.35487 13.85303 h 26.73281 l 0.0978,-11.99681 -15.41065,0.004 v -3.21534 z"
+             sodipodi:nodetypes="cccccccc" />
+          <text
+             xml:space="preserve"
+             style="font-size:2.22563px;line-height:1.25;font-family:sans-serif;stroke-width:0.139102"
+             x="164.24686"
+             y="156.85286"
+             id="text131865-9-1"
+             transform="scale(0.96464965,1.0366458)"><tspan
+               sodipodi:role="line"
+               id="tspan131863-2-3"
+               style="stroke-width:0.139102"
+               x="164.24686"
+               y="156.85286">hospital2</tspan></text>
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+           x="157.33182"
+           y="204.14975"
+           id="text53129-3-6-99"
+           transform="scale(0.99914294,1.0008578)"><tspan
+             sodipodi:role="line"
+             id="tspan53127-1-4-1"
+             style="stroke-width:0.140938"
+             x="157.33182"
+             y="204.14975">- room6.yaml</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+           x="157.33182"
+           y="207.0007"
+           id="text53129-3-6-9-4"
+           transform="scale(0.99914294,1.0008578)"><tspan
+             sodipodi:role="line"
+             id="tspan53127-1-4-8-9"
+             style="stroke-width:0.140938"
+             x="157.33182"
+             y="207.0007">- room7.yaml</tspan></text>
+        <path
+           id="rect126495-0-1"
+           style="fill:none;stroke:#000000;stroke-width:0.129816;stroke-miterlimit:4;stroke-dasharray:none"
+           d="m 156.35258,197.43589 v 1.55378 15.88683 h 26.73281 l 0.0978,-13.75809 -15.41065,0.005 v -3.68739 z"
+           sodipodi:nodetypes="cccccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:2.22563px;line-height:1.25;font-family:sans-serif;stroke-width:0.139102"
+           x="162.99612"
+           y="192.89354"
+           id="text131865-9-0"
+           transform="scale(0.96464965,1.0366458)"><tspan
+             sodipodi:role="line"
+             id="tspan131863-2-7"
+             style="stroke-width:0.139102"
+             x="162.99612"
+             y="192.89354">hospital3</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+           x="157.33182"
+           y="209.85167"
+           id="text53129-3-6-7-5"
+           transform="scale(0.99914294,1.0008578)"><tspan
+             sodipodi:role="line"
+             id="tspan53127-1-4-2-8"
+             style="stroke-width:0.140938"
+             x="157.33182"
+             y="209.85167">- room8.yaml</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:2.25502px;line-height:1.25;font-family:sans-serif;stroke-width:0.140938"
+           x="157.33182"
+           y="212.70262"
+           id="text53129-3-6-7-5-4"
+           transform="scale(0.99914294,1.0008578)"><tspan
+             sodipodi:role="line"
+             id="tspan53127-1-4-2-8-8"
+             style="stroke-width:0.140938"
+             x="157.33182"
+             y="212.70262">- room9.yaml</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g83745-8"
+       transform="translate(-90.169997,-35.999498)">
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.59412"
+         y="127.56001"
+         id="text53129-3-5"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1-7"
+           style="stroke-width:0.264583"
+           x="155.59412"
+           y="127.56001">- outout</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.85249"
+         y="134.82043"
+         id="text53129-3-7-4"
+         inkscape:transform-center-x="6.1201372"
+         inkscape:transform-center-y="0.31995918"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1-5-1"
+           style="stroke-width:0.264583"
+           x="155.85249"
+           y="134.82043">- success</tspan></text>
+    </g>
+    <g
+       id="g83745-8-3"
+       transform="translate(-41.806883,-34.312015)">
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.59412"
+         y="127.56001"
+         id="text53129-3-5-1"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1-7-8"
+           style="stroke-width:0.264583"
+           x="155.59412"
+           y="127.56001">- outout</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="155.85249"
+         y="134.82043"
+         id="text53129-3-7-4-9"
+         inkscape:transform-center-x="6.1201372"
+         inkscape:transform-center-y="0.31995918"><tspan
+           sodipodi:role="line"
+           id="tspan53127-1-5-1-6"
+           style="stroke-width:0.264583"
+           x="155.85249"
+           y="134.82043">- success</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="18.091156"
+       y="96.957077"
+       id="text53129-3-7-3"
+       inkscape:transform-center-x="6.1201372"
+       inkscape:transform-center-y="0.31995918"><tspan
+         sodipodi:role="line"
+         id="tspan53127-1-5-8"
+         style="stroke-width:0.264583"
+         x="18.091156"
+         y="96.957077">- hospital_dict</tspan></text>
+  </g>
+</svg>

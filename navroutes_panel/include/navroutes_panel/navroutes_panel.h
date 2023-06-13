@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>
+#include <list>
 
 // using json = nlohmann::json;
 
@@ -29,22 +30,32 @@ namespace navroutes_panel
 
             public:
             explicit NavroutesPanel(QWidget *parent = nullptr);
-            //lohmann::json decoded_data;
-            
+           
             private Q_SLOTS:
             void onLineEditRouteEditingFinished();
 
-            protected Q_SLOTS:
-            void onHospitalChanged(int index);
-            void onRoomChanged(int index);
-
+            protected Q_SLOTS:           
+            void onHospitalChanged(int index, std::vector<QStringList> vector_rooms);
+            void onRoomChanged(int index, std::vector<QStringList> vector_rooms, std::vector<QStringList> vector_routes, int hindex, nlohmann::json decoded_data);
+            void onRouteChanged(int index);
             void onInitialize() override;
-            //void onInitialize(nlohmann::json& decoded_data);
-
-            private:
-
+            
+            private:  
+            bool hospital_menu;
+            bool room_menu;
+            bool route_menu;
+            std::list<std::string> yaml_file_path_list;
+            std::string set_room;
+            int set_route_id = 0;          
+            int selected_hospital_index;
+            int selected_room_index;
+            std::vector<QStringList> vector_rooms; 
+            std::vector<QStringList> vector_routes;
             QStringList hospitals; 
-            QStringList rooms;           
+            QStringList rooms; 
+            QStringList routes; 
+               
+            QString selected_hospital;
             QString roomValue;
             QString routeValue;
             QLineEdit* lineEdit_room;
@@ -60,13 +71,14 @@ namespace navroutes_panel
             QComboBox* room_dropdown_;
             QComboBox* route_dropdown_;
             QPushButton* push_button_;
-
             
             private Q_SLOTS:
             void onPushButtonClicked();
 
             private:
-            
+            std::string yaml_file_path;
+            int room_id;
+            void printKeys(const nlohmann::json& obj, const std::string& parentKey);
             nlohmann::json decoded_data;
 
             std::string encoded_data_string;

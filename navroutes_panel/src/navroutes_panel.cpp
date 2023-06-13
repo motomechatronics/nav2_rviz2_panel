@@ -18,6 +18,9 @@
 
 namespace navroutes_panel 
 {
+        // *****************************************//
+        // ******** constructor definition *********//
+        // *****************************************//
 
     NavroutesPanel::NavroutesPanel(QWidget *parent) //
             : rviz_common::Panel(parent)
@@ -31,6 +34,7 @@ namespace navroutes_panel
 
         // hospitals dropdown box definition
         hospital_dropdown_ = new QComboBox(this);
+        hospital_dropdown_->setFixedWidth(250);
         hospital_dropdown_->setGeometry(10, 70, 150, 30);
    
         // rooms dropdown box definition
@@ -48,119 +52,58 @@ namespace navroutes_panel
         auto room = new QLabel("Room:");
         auto route = new QLabel("Route:");
 
-
         auto lineEdit_room = new QLineEdit(); // to be deleted
         auto lineEdit_route = new QLineEdit(); // to be deleted
         
         // button definition
-        auto pushbutton = new QPushButton("display route");
-   
-        // // *****************************************//
-        // // *********** client definition ***********//
-        // // *********  hospitals dictionary *********//
-        // // *****************************************//
-        // // starting from keys and values of a flatten dictionary constructs the hospitals original dictionary
-        // // The hospitals_dict to make work drop-down menu
-
-        // auto client_hospitals_dict = rclcpp::Node::make_shared("navroutes_datareader_client");
-        // auto service_client_hospitals_dict = client_hospitals_dict->create_client<custom_interfaces::srv::HospitalsServiceMessage>(
-        //     "hospitals_datareader_service");
-
-        // auto response_received = [](rclcpp::Client<custom_interfaces::srv::HospitalsServiceMessage>::SharedFuture future) {
-        //     auto response = future.get();
-        //     if (response->success) {
-
-        //     std::string encoded_data_string = response->encoded_dict;
-        //     nlohmann::json decoded_data = nlohmann::json::parse(encoded_data_string);
-        //     //decoded_data = nlohmann::json::parse(encoded_data_string);
-        //     // debug decoded_data 
-        //     std::cout << "Decoded Data: " << decoded_data.dump() << std::endl;
-        //     QString str = "hello";
-        //     // qDebug() << "Hospitals:";
-        //     // for (auto it = decoded_data.begin(); it != decoded_data.end(); ++it) {
-        //     // qDebug() << QString::fromStdString(it.key());
-        //     // hospitals << QString::fromStdString(it.key());
-        //     // }
-        //     //std::vector<std::string> keys = response->key;
-        //     //std::string values = response->value;
-
-        //     // Debug keys/values display
-        //     //auto flag = true; // false;
-        //     // -------------------            
-        //     // if (flag) {
-        //     // for (const auto& key : keys) {
-        //     // qDebug() << QString::fromStdString(key);
-        //     // }                                    
-        //     // qDebug() << QString::fromStdString(values); 
-        //     // }             
-
-        //     //std::map<std::string,int> hospitals_dict = response->hospitals_dict
-                
-        //     qDebug() << "hospitals dictionary successfully recived";
-        //     } else {
-        //         qDebug() << "hospitals dictionary not found";
-        //     }
-        // };
-
-        // // send the request to the server and wait the answer
-        // auto request_dict = std::make_shared<custom_interfaces::srv::HospitalsServiceMessage::Request>();
-        // auto future = service_client_hospitals_dict->async_send_request(request_dict);
-        // rclcpp::spin_until_future_complete(client_hospitals_dict, future, std::chrono::seconds(5));
-
-        // // handle the response
-        // if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {
-        //     response_received(std::move(future));
-        // } else {
-        //     qDebug() << "Service call timed out";
-        // }
-
+        auto pushbutton = new QPushButton("display route");   
+        
         // *****************************************//
         // *********** client definition ***********//
         // ***********  display routes *************//
         // *****************************************//
 
         pushbutton->connect(pushbutton, &QPushButton::clicked, [=]() {
-        //auto lineEdit_route = new QLineEdit();
-        //route = 
-        //bool ok;
-        auto request = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();
-        
-        request_routes->room = "office";
-        request_routes->route = lineEdit_route->text().toInt(); //lineEdit_route->text().toInt(&ok);
+       
+        // clicking the button, the client calls the server //
+        auto request_routes = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();               
+        request_routes->room = set_room;        
+        request_routes->route = set_route_id; //lineEdit_route->text().toInt(); //lineEdit_route->text().toInt(&ok);
         auto client_route_display = rclcpp::Node::make_shared("navroutes_visualization_client");
         auto service_client_route_display = client_route_display->create_client<custom_interfaces::srv::NavroutesServiceMessage>(
             "navroutes_visualization_server");
-        //routeValue = lineEdit_route->text();
-        // Azione da eseguire quando il bottone viene premuto
-        // Puoi inserire qui il codice che desideri eseguire al click del bottone
-        // Ad esempio, puoi stampare un messaggio sulla console
-
-        // Funzione da eseguire quando la risposta del servizio viene ricevuta
+        qDebug() << "fault after...";
+        // When the server responds the following function is executed //
         auto response_received = [](rclcpp::Client<custom_interfaces::srv::NavroutesServiceMessage>::SharedFuture future) {
             auto response = future.get();
-            if (response->success) {
+            if (response->success) 
+            {
                 qDebug() << "Route successfully displayed";
-            } else {
+            } 
+            else 
+            {
                 qDebug() << "Route not found";
             }
         };
 
-        // Invio della richiesta al server e attesa della risposta
-        auto future = service_client_route_display->async_send_request(request);
+        // this block sends the request to server and waits the answer //
+        auto future = service_client_route_display->async_send_request(request_routes);
         rclcpp::spin_until_future_complete(client_route_display, future, std::chrono::seconds(5));
 
-        // Gestione della risposta ricevuta
-        if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {
+        // Response received managing
+        if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) 
+        {
             response_received(std::move(future));
-        } else {
+        } 
+        else 
+        {
             qDebug() << "Service call timed out";
-        }
-
-  
-            qDebug() << "Hai premuto il bottone!";
+        }  
+            qDebug() << "Button pushed!";
             qDebug() << lineEdit_route->text().toInt();
         });
 
+        // definition of the menu structure //
         layout->addWidget(title, 0, 0, 1, 2);
         layout->addWidget(subtitle, 1, 0, 1, 2);
         layout->addWidget(hospital, 2, 0);
@@ -173,7 +116,6 @@ namespace navroutes_panel
 
         setLayout(layout);
     }
-
 
     void NavroutesPanel::onInitialize()
   {
@@ -195,46 +137,151 @@ namespace navroutes_panel
                 std::string encoded_data_string = response->encoded_dict;
                 nlohmann::json decoded_data = nlohmann::json::parse(encoded_data_string);
                 qDebug() << "hospitals dictionary successfuly received";
-
-                // populates hospitals drop-down menu                
-                //QStringList hospitals;                
+                //int i = 0;
+                // Populates hospitals drop-down menu              
                 for (auto it = decoded_data.begin(); it != decoded_data.end(); ++it) {
-                //qDebug() << QString::fromStdString(it.key());
-                hospitals << QString::fromStdString(it.key());
-                }
+                qDebug() << QString::fromStdString(it.key());                
                 
+                // Populates room drop-down menu    
+                if (it.value().is_object()) {
+                    rooms.clear();
+                    for (auto nestedIt = it.value().begin(); nestedIt != it.value().end(); ++nestedIt)
+                        {   
+                        rooms.append(QString::fromStdString(nestedIt.key()));             
+                        }
+                    vector_rooms.push_back(rooms);
+                 }
+                 //i = i + 1;
+               
+                //hospitals.append(QString::fromStdString(it.key()));             
+                }
+
+                 // extracts dictionary data and populates routes drop-down menu    
+                //int i = 0;           
+                for (auto& level1 : decoded_data.items()) {
+                std::string key = level1.key();
+                nlohmann::json value = level1.value();
+
+                qDebug() << "Hospital: " << QString::fromStdString(key);
+                //qDebug() << "Level 1 - Value: " << QString::fromStdString(value.dump());
+
+                // level 2
+                for (auto& level2 : value.items()) {
+                    std::string nestedKey = level2.key();
+                    nlohmann::json nestedValue = level2.value();
+
+                //qDebug() << "Level 2 - Key: " << QString::fromStdString(nestedKey);
+                //qDebug() << "Level 2 - Value: " << QString::fromStdString(nestedValue.dump());
+
+                // level 3
+                for (auto& level3 : nestedValue.items()) {
+                    std::string subNestedKey = level3.key();
+                    nlohmann::json subNestedValue = level3.value();
+
+                    //qDebug() << "Level 3 - Key: " << QString::fromStdString(subNestedKey);
+                    //qDebug() << "Level 3 - Value: " << QString::fromStdString(subNestedValue.dump());
+                    
+                    if (QString::fromStdString(subNestedKey) == "room_name")
+                    {
+                        QString rooms_ = QString::fromStdString(subNestedValue.dump());
+                        rooms_.remove(0, 1);            
+                        rooms_.chop(1); 
+                        qDebug() << "room_name: " << rooms_;
+                    }
+                    else if (QString::fromStdString(subNestedKey) == "yaml_file_path")
+                    {   
+                        QString filePath = QString::fromStdString(subNestedValue.dump());
+                        filePath.remove(0, 1);            
+                        filePath.chop(1);            
+                        qDebug() << "yaml_file_path: " << filePath;
+                        yaml_file_path_list.push_back(filePath.toStdString());
+                    }
+                    else if (QString::fromStdString(subNestedKey) == "room_id")
+                    {   
+                        QString room_id = QString::fromStdString(subNestedValue.dump());
+                        room_id.remove(0, 1);            
+                        room_id.chop(1);            
+                        qDebug() << "room_id: " << room_id;                       
+                    } 
+                    else if (QString::fromStdString(subNestedKey) == "nav_routes")
+                    {   
+                        routes.clear();
+                        for (auto& it_routes : subNestedValue.items())
+                        {                       
+                        std::string routes_name = it_routes.key();
+                        nlohmann::json routes_id = it_routes.value();
+
+                        //QString room_id = QString::fromStdString(subNestedValue.dump());
+                        //routes_id.remove(0, 1);            
+                        //routes_id.chop(1);
+                        routes.append(QString::fromStdString(routes_name));                 
+                        qDebug() << "routes_name: " << QString::fromStdString(routes_name);
+                        qDebug() << "routes_id: " <<  QString::fromStdString(routes_id.dump());
+                        }  
+                        vector_routes.push_back(routes);                     
+                    } 
+
+                        // for(const QString& route : routes)
+                        // {
+                        // qDebug() << "stamp routes QStringList" << route;
+                        // } 
+
+
+                         
+                        } // level 3 
+                            int numStringLists = vector_routes.size();
+
+                            qDebug() << "Numero di QStringList nel vettore: " << numStringLists;
+                            // for(const QString& routelist : vector_routes[1]) {
+                            // qDebug() << "vector routes QStringList" << routelist;
+                            // }                
+                    } //level 2
+                //i = i + 1;
+                hospitals.append(QString::fromStdString(key));   
+                } //level 1
+
+
+
+                // Populates hospitals drop-down menu
                 hospital_dropdown_->clear();
                 hospital_dropdown_->addItems(hospitals);
-
-                // Popolare le rooms in base all'ospedale selezionato
+                
+                // Populates rooms drop-down menu
                 QString selected_hospital = hospital_dropdown_->currentText();
-                //QStringList rooms;
-                if (selected_hospital == "bon_secours") {
-                    rooms << "Room 1" << "Room 2" << "Room 3";
-                } else if (selected_hospital == "coombe") {
-                    rooms << "Room A" << "Room B" << "Room C";
-                } else if (selected_hospital == "t_james") {
-                    rooms << "Room X" << "Room Y" << "Room Z";
-                }
+                int hindex = hospitals.indexOf(selected_hospital);
+                // qDebug() << "hindex: " << hindex;
                 room_dropdown_->clear();
-                room_dropdown_->addItems(rooms);
+                room_dropdown_->addItems(vector_rooms[hindex]);
 
-                // Popolare le routes in base alla room selezionata
+                // Populates routes drop-down menu
                 QString selected_room = room_dropdown_->currentText();
-                QStringList routes;
-                if (selected_room == "Room 1") {
-                    routes << "Route 1" << "Route 2" << "Route 3";
-                } else if (selected_room == "Room 2") {
-                    routes << "Route A" << "Route B" << "Route C";
-                } else if (selected_room == "Room 3") {
-                    routes << "Route X" << "Route Y" << "Route Z";
-                }
+                int rindex = vector_rooms[hindex].indexOf(selected_room);
+                // qDebug() << "rindex: " << rindex;
                 route_dropdown_->clear();
-                route_dropdown_->addItems(routes);
+                route_dropdown_->addItems(vector_routes[rindex]);
 
-                // Connect the signals to the corresponding slots
-                connect(hospital_dropdown_, SIGNAL(currentIndexChanged(int)), this, SLOT(onHospitalChanged(int)));
-                connect(room_dropdown_, SIGNAL(currentIndexChanged(int)), this, SLOT(onRoomChanged(int)));
+
+                // Connect the signals to the corresponding slots                
+                connect(hospital_dropdown_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index)
+                {
+                    onHospitalChanged(index, vector_rooms);
+                    qDebug() << "calling connect...onHospitalChanged";
+                });
+
+                connect(room_dropdown_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index)
+                {
+                    onRoomChanged(index, vector_rooms, vector_routes, hindex, decoded_data);
+                    qDebug() << "calling connect...onRoomChanged";
+                });
+
+                connect(route_dropdown_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index)
+                {
+                    onRouteChanged(index);
+                    qDebug() << "calling connect...onRouteChanged";
+                });
+                
+                
+                //connect(room_dropdown_, SIGNAL(currentIndexChanged(int)), this, SLOT(onRoomChanged(int)));
                                 
             } 
             else
@@ -260,92 +307,149 @@ namespace navroutes_panel
         }
 
 
-
-//   // populates hospitals drop-down menu
-  
-//     //std::cout << "Decoded Data: " << decoded_data.dump() << std::endl;
-//     //QString s = "hello";
-//     QStringList hospitals;
-//     qDebug() << "Hospitals:";
-//     for (auto it = decoded_data.begin(); it != decoded_data.end(); ++it) {
-//     qDebug() << QString::fromStdString(it.key());
-//     hospitals << QString::fromStdString(it.key());
-//     }
-//     hospitals << str << "2" << "3";
-//     hospital_dropdown_->clear();
-//     hospital_dropdown_->addItems(hospitals);
-
-
-
-
-//   // Popolare le rooms in base all'ospedale selezionato
-//   QString selected_hospital = hospital_dropdown_->currentText();
-//   QStringList rooms;
-//   if (selected_hospital == "bon_secours") {
-//     rooms << "Room 1" << "Room 2" << "Room 3";
-//   } else if (selected_hospital == "coombe") {
-//     rooms << "Room A" << "Room B" << "Room C";
-//   } else if (selected_hospital == "t_james") {
-//     rooms << "Room X" << "Room Y" << "Room Z";
-//   }
-//   room_dropdown_->clear();
-//   room_dropdown_->addItems(rooms);
-
-//   // Popolare le routes in base alla room selezionata
-//   QString selected_room = room_dropdown_->currentText();
-//   QStringList routes;
-//   if (selected_room == "Room 1") {
-//     routes << "Route 1" << "Route 2" << "Route 3";
-//   } else if (selected_room == "Room 2") {
-//     routes << "Route A" << "Route B" << "Route C";
-//   } else if (selected_room == "Room 3") {
-//     routes << "Route X" << "Route Y" << "Route Z";
-//   }
-//   route_dropdown_->clear();
-//   route_dropdown_->addItems(routes);
-
 //   // Connect the signals to the corresponding slots
 //   connect(hospital_dropdown_, SIGNAL(currentIndexChanged(int)), this, SLOT(onHospitalChanged(int)));
 //   connect(room_dropdown_, SIGNAL(currentIndexChanged(int)), this, SLOT(onRoomChanged(int)));
 }
 
-void NavroutesPanel::onHospitalChanged(int index)
+
+
+// this function displays the rooms related the selected hospital //
+void NavroutesPanel::onHospitalChanged(int index, std::vector<QStringList> vector_rooms)
 {
     // Get the selected hospital
-    QString selected_hospital = hospital_dropdown_->currentText();
-
-    // Find the corresponding entry in the decoded_data JSON object
-    auto it = decoded_data.find(selected_hospital.toStdString());
-    if (it != decoded_data.end() && it->is_object())
-    {
-        // Get the rooms from the selected hospital's entry
-        const nlohmann::json& rooms_data = *it;
-        QStringList rooms;
-        for (const auto& room_entry : rooms_data.items())
-        {
-            rooms << QString::fromStdString(room_entry.key());
-        }
-
-        // Clear and populate the rooms drop-down menu
-        room_dropdown_->clear();
-        room_dropdown_->addItems(rooms);
-    }
+    qDebug() << "void NavroutesPanel::onHospitalChanged(int index)";
+    selected_hospital = hospital_dropdown_->currentText();
+    //qDebug() << QString::fromStdString(selected_hospital.toStdString());
+    //int i = hospitals.indexOf(selected_hospital);
+    selected_hospital_index = hospitals.indexOf(selected_hospital);
+    qDebug() << "onHospitalChanged - hospitals i: " << selected_hospital_index;
+    room_dropdown_->clear();
+    //room_dropdown_->addItems(vector_rooms[index]);
+    room_dropdown_->addItems(vector_rooms[selected_hospital_index]);
+    
 }
 
-void NavroutesPanel::onRoomChanged(int index)
+// void NavroutesPanel::onRoomChanged(int index, std::vector<QStringList> vector_rooms, std::vector<QStringList> vector_routes, int hindex)
+// {
+//   // Get the selected rooms
+//   qDebug() << "void NavroutesPanel::onRoomChanged(int index, std::vector<QStringList> vector_rooms...";
+//   QString selected_room = room_dropdown_->currentText();    
+//   int rindex = vector_rooms[selected_hospital_index].indexOf(selected_room);
+//   route_dropdown_->clear();
+//   route_dropdown_->addItems(vector_routes[rindex]);
+  
+// }
+
+void NavroutesPanel::onRoomChanged(int index, std::vector<QStringList> vector_rooms, std::vector<QStringList> vector_routes, int hindex, nlohmann::json decoded_data)
 {
-  // Aggiornare le routes in base alla room selezionata
-  QString selected_room = room_dropdown_->currentText();
-  QStringList routes;
-  if (selected_room == "Room 1") {
-    routes << "Route 1" << "Route 2" << "Route 3";
-  } else if (selected_room == "Room 2") {
-    routes << "Route A" << "Route B" << "Route C";
-  } else if (selected_room == "Room 3") {
-    routes << "Route X" << "Route Y" << "Route Z";
-  }
-  route_dropdown_->clear();
-  route_dropdown_->addItems(routes);
+    // Get the selected rooms
+    if (selected_hospital == "") 
+    {
+    selected_hospital = "bon_secours";
+    }
+    qDebug() << "void NavroutesPanel::onRoomChanged(int index, std::vector<QStringList> vector_rooms...";
+    QString selected_room = room_dropdown_->currentText();    
+
+    for (auto& level1 : decoded_data.items()) 
+    {
+        std::string hospital = level1.key();
+        if (hospital == selected_hospital.toStdString())
+        {
+            qDebug() << "hospital matches!..." << QString::fromStdString(hospital) ;
+            nlohmann::json value = level1.value();
+            for (auto& level2 : value.items()) 
+                {
+                    std::string room = level2.key();
+                    if (room == selected_room.toStdString())
+                    {
+                    qDebug() << "room matches!... " << QString::fromStdString(room);
+                    nlohmann::json nestedValue = level2.value();   
+                        for (auto& level3 : nestedValue.items()) 
+                        {
+                        std::string subNestedKey = level3.key();
+                        nlohmann::json subNestedValue = level3.value(); 
+                        if (QString::fromStdString(subNestedKey) == "nav_routes")
+                            {
+                                routes.clear();
+                                for (auto& it_routes : subNestedValue.items())
+                                {                       
+                                std::string routes_name = it_routes.key();                                
+                                nlohmann::json routes_id = it_routes.value();
+
+                                QString room_id = QString::fromStdString(subNestedValue.dump());
+                                //routes_id.remove(0, 1);            
+                                //routes_id.chop(1);
+                                routes.append(QString::fromStdString(routes_name));                 
+                                //qDebug() << "routes_name: " << QString::fromStdString(routes_name);
+                                qDebug() << "routes_id: " <<  QString::fromStdString(routes_id.dump());
+                                }  
+                                //vector_routes.push_back(routes);  
+                            }
+                        else if (QString::fromStdString(subNestedKey) == "yaml_file_path")
+                            {   
+                                QString filePath = QString::fromStdString(subNestedValue.dump());
+                                filePath.remove(0, 1);            
+                                filePath.chop(1);  
+                                set_room = filePath.toStdString();         
+                                qDebug() << "yaml_file_path: " << filePath;
+                            }
+                                  
+
+                        }
+
+                    }
+                    else 
+                    {
+                        qDebug() << "room does not match!";
+                        qDebug() << QString::fromStdString(room);
+                    }
+                    // route_dropdown_->clear();
+                    // route_dropdown_->addItems(routes)
+
+                }
+             
+        
+        }  
+        else 
+        {
+            qDebug() << "hospital does not match!";
+            qDebug() << QString::fromStdString(hospital);
+        } 
+    
+    }
+route_dropdown_->clear();
+route_dropdown_->addItems(routes);
+}
+
+
+void NavroutesPanel::onRouteChanged(int index)
+{
+    if (index >= 0)    
+    {
+    qDebug() << "void NavroutesPanel::onRouteChanged(int index)";
+    route_menu = true; 
+    QString selected_route = route_dropdown_->currentText();  
+    int selectedIndex = route_dropdown_->currentIndex();  
+    set_route_id = selectedIndex;   
+    if (set_room.empty())
+    {
+    set_room = yaml_file_path_list.front();
+    set_route_id = selectedIndex;
+    qDebug() << "set_room";
+    }
+
+    
+    //set_room = "/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/tallaght_university/immunotherapy.yaml";
+    //set_route_id = 0;
+    //qDebug() << "data route setup done!";
+    
+    }
+    else 
+    {
+    route_menu = false;
+    }
+    
 }
 
 
@@ -358,6 +462,25 @@ void NavroutesPanel::onRoomChanged(int index)
 PLUGINLIB_EXPORT_CLASS(navroutes_panel::NavroutesPanel, rviz_common::Panel)
 
 
-  
+ 
+// json dictionary structure //
 
+// {'st_james': 
+// 	{'delivery':
+// 		 {'room_id': 'room8_011', 
+// 		'room_name': 'The Akara Office8', 
+// 		'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/delivery.yaml', 
+// 		'nav_routes': {'Clean bed': [0], 'Clean bins': [1], 'Test': [2]}}, 
+	
+// 	'chemotherapy':
+// 		 {'room_id': 'room7_010', 
+// 		'room_name': 'The Akara Office7',
+// 		 'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/chemotherapy.yaml',
+// 		 'nav_routes': {'Clean bed': [0], 'Clean bins': [1], 'Test': [2]}},
+	
+// 	'orthopedic': {'room_id': 'room9_012',
+// 		 'room_name': 'The Akara Office9',
+// 		 'yaml_file_path': '/home/user/ros2_ws/src/nav2routes_datamanager/config/hospitals/st_james/orthopedic.yaml', 
+// 		'nav_routes': {'Clean bed9': [0], 'Clean bins9': [1], 'Test9': [2]}}},
 
+// }

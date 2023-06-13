@@ -107,3 +107,8 @@ for i in range(len(points) - 1):
     print('ccccccccccccccc')
     middle_point = (points[i]+points[i+1])
     print(middle_point)
+
+
+    print("YYYYYYYYYYYYYYYYYYY")
+    d = rooms['room_name']
+    print(d)

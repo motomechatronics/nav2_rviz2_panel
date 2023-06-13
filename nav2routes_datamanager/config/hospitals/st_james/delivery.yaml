@@ -1,6 +1,6 @@
 rooms:
-  room_id: "room3"
-  room_name: "The Akara Office3"
+  room_id: "room8_011"
+  room_name: "Delivery room"
 
   initial_pose:
     position:
@@ -82,16 +82,16 @@ rooms:
         1: [[-4.71,5], [-4.71,5],[3.14,10]]
         3: [[-4.71,5], [-4.71,5]]
         2: [[-4.71,5], [-4.71,5]]
-      route_name: "Clean bed"
+      route_name: "Clean bed delivery"
     1:
       points: 
         1: [[-4.71,5], [-4.71,5],[-4.71,10]]
         3: [[-4.71,5], [-4.71,5]]
-      route_name: "Clean bins"
+      route_name: "Clean bins delivery"
     2:
       points:  
         5: [[-1.571,5.1], [-4.712,5.2]]
         6: [[-4.712,5.3], [-1.57,5.4]]
         7: [[-1.573,5.5], [-4.713,5.6]]
         8: [[-1.574,5.7], [-4.714,5.8]]
-      route_name: "Test"
+      route_name: "Test delivery"
