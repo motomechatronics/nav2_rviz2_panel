@@ -1,0 +1,9 @@
+<library path="libnav2routes_datapanel">
+    <class name="nav2routes_datapanel/Nav2routesDataPanel"
+           type="nav2routes_datapanel::Nav2routesDataPanel"
+           base_class_type="rviz_common::Panel">
+        <description>
+            nav2routes_datapanel
+        </description>
+    </class>
+</library>
