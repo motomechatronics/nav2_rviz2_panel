@@ -191,7 +191,7 @@ class Nav2RouterDataDisplayServer(Node):
             # marker.type = Marker.ARROW
             marker.type = Marker.MESH_RESOURCE
             marker.action = Marker.ADD
-            marker.mesh_resource = "package://rooms_pkg/meshes/footprint.dae"
+            marker.mesh_resource = "package://nav2routes_datadisplay/meshes/footprint.dae"
             marker.mesh_use_embedded_materials = True
             marker.pose.position.x = x
             marker.pose.position.y = y
@@ -265,7 +265,7 @@ class Nav2RouterDataDisplayServer(Node):
                 marker2.id = k                        
                 marker2.type = Marker.MESH_RESOURCE
                 marker2.action = Marker.ADD
-                marker2.mesh_resource = "package://rooms_pkg/meshes/arrow3.dae"
+                marker2.mesh_resource = "package://nav2routes_datadisplay/meshes/arrow3.dae"
                 marker2.mesh_use_embedded_materials = True
                 marker2.pose.position.x = phase_pose[j][0]
                 marker2.pose.position.y = phase_pose[j][1]
@@ -337,7 +337,7 @@ class Nav2RouterDataDisplayServer(Node):
             marker2.id = i                
             marker2.type = Marker.MESH_RESOURCE
             marker2.action = Marker.ADD
-            marker2.mesh_resource = "package://rooms_pkg/meshes/arrow.dae"
+            marker2.mesh_resource = "package://nav2routes_datadisplay/meshes/arrow.dae"
             marker2.mesh_use_embedded_materials = True
             marker2.pose.position.x = xm
             marker2.pose.position.y = ym
@@ -374,7 +374,7 @@ class Nav2RouterDataDisplayServer(Node):
                 marker2.id = k            
                 marker2.type = Marker.MESH_RESOURCE
                 marker2.action = Marker.ADD
-                marker2.mesh_resource = "package://rooms_pkg/meshes/background_text2.dae"
+                marker2.mesh_resource = "package://nav2routes_datadisplay/meshes/background_text2.dae"
                 marker2.mesh_use_embedded_materials = True
                 correction_x = - 0.05
                 correction_y = 0.01
