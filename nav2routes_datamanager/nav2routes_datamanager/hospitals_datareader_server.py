@@ -60,7 +60,7 @@ class HospitalsDataReaderServer(Node):
                             map_yaml_file_path = room_path_file.replace('_points.yaml','.yaml')
                             room_routes = self.extract_routes(room_data)  
                             room_routes = {key: list(value) for key, value in room_routes.items()}                  
-                            rooms[room] = {'room_id': room_id, 'room_name': room_name,  'map_yaml_file_path': map_yaml_file_path,'nav_routes': room_routes}
+                            rooms[room] = {'room_id': room_id, 'room_name': room_name, 'room_yaml_file_path': room_yaml_file_path, 'map_yaml_file_path': map_yaml_file_path,'nav_routes': room_routes}
         return rooms
 
 
