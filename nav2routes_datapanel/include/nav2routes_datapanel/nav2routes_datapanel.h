@@ -47,11 +47,12 @@ namespace nav2routes_datapanel
             private:  
             int hindex;
             int rindex;
-            int roindex;
-
+            int roindex;            
+          
             std::list<std::string> room_yaml_file_path_list;
             std::list<std::string> map_yaml_file_path_list;
             std::string set_room;
+            std::string set_map;
             int set_route_id = 0;          
             std::vector<QStringList> vector_rooms; 
             std::vector<QStringList> vector_routes;
@@ -61,12 +62,15 @@ namespace nav2routes_datapanel
             QStringList routes;            
             std::unordered_map<int, QStringList> rooms_map;
             std::unordered_map<int, std::unordered_map<int, QStringList>> routes_map;
-            std::unordered_map<int, std::unordered_map<int, std::unordered_map<int, std::list<std::string>>>> display_routes_map;
-           
+            std::unordered_map<int, std::unordered_map<int, std::string>> room_path_map;
+            std::unordered_map<int, std::unordered_map<int, std::string>> map_path_map;
+            //std::unordered_map<int, std::unordered_map<int, std::unordered_map<int, std::list<std::string>>>> display_routes_map;           
 
             QString selected_hospital;
             QString selected_room;
             QString selected_route;
+            QString filePath;
+            QString map_filePath;
               
             QVBoxLayout* layout_;
             QLabel* title_label_;
@@ -91,7 +95,7 @@ namespace nav2routes_datapanel
 
             std::string encoded_data_string;
             void initializeComboBoxes();
-            std::string getElementAtIndex(const std::list<std::string>& myList, int index);
+            //std::string getElementAtIndex(const std::list<std::string>& myList, int index);
             void loadMap(std::string path);
                         
             //std::shared_ptr<custom_interfaces::srv::NavroutesServiceMessage::Request> request_routes;
@@ -111,4 +115,4 @@ namespace nav2routes_datapanel
            
         };
 
-    } // namespace navorutes_pxxsssss
+    } // namespace navorutes

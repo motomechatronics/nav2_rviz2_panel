@@ -1,9 +1,10 @@
-<library path="libnav2routes_datapanel">
+<library path="nav2routes_datapanel">
     <class name="nav2routes_datapanel/Nav2routesDataPanel"
            type="nav2routes_datapanel::Nav2routesDataPanel"
            base_class_type="rviz_common::Panel">
         <description>
-            nav2routes_datapanel
+            nav2routes_datapanel is a rviz panel displaying data for Akara Robots service
+            At the state of the art, it allows to visualize the routes in each hospitals rooms.
         </description>
     </class>
 </library>

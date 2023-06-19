@@ -80,7 +80,8 @@ namespace nav2routes_datapanel
         {
        
             // clicking the button, the client calls the server //
-            auto request_routes = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();               
+            auto request_routes = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();  
+            onRouteChanged(1);  
             request_routes->room = set_room;        
             request_routes->route = set_route_id;
             auto client_route_display = rclcpp::Node::make_shared("nav2routes_datadisplay_client");
@@ -129,10 +130,13 @@ namespace nav2routes_datapanel
         // *****************************************//
         // starting from keys and values of a flatten dictionary constructs the hospitals original dictionary
         // The hospitals_dict to make work drop-down menu
-
+        
         auto client_hospitals_dict = rclcpp::Node::make_shared("navroutes_datareader_client");
         auto service_client_hospitals_dict = client_hospitals_dict->create_client<custom_interfaces::srv::HospitalsServiceMessage>(
-            "hospitals_datareader_service");    
+            "hospitals_datareader_service");
+
+        client_load_map_node = rclcpp::Node::make_shared("nav2_routes_load_map_client");
+        service_client_load_map = client_load_map_node->create_client<nav2_msgs::srv::LoadMap>("map_server/load_map");    
 
         auto response_received = [this](rclcpp::Client<custom_interfaces::srv::HospitalsServiceMessage>::SharedFuture future) {
             auto response = future.get();
@@ -182,19 +186,26 @@ namespace nav2routes_datapanel
                         
                         else if (QString::fromStdString(subNestedKey) == "room_yaml_file_path")
                         {   
-                            QString filePath = QString::fromStdString(subNestedValue.dump());
+                            filePath = QString::fromStdString(subNestedValue.dump());
                             filePath.remove(0, 1);            
-                            filePath.chop(1);            
-                            //qDebug() << "room_yaml_file_path: " << filePath;
+                            filePath.chop(1);
+
+                            // qDebug() << j;            
+                            // qDebug() << "room_yaml_file_path: " << filePath;
                             room_yaml_file_path_list.push_back(filePath.toStdString());
+                            //qDebug() << "room list size: " << room_yaml_file_path_list.size();
+                            
                         }
                         else if (QString::fromStdString(subNestedKey) == "map_yaml_file_path")
                         {   
-                            QString filePath = QString::fromStdString(subNestedValue.dump());
-                            filePath.remove(0, 1);            
-                            filePath.chop(1);            
+                            map_filePath = QString::fromStdString(subNestedValue.dump());
+                            map_filePath.remove(0, 1);            
+                            map_filePath.chop(1);            
                             //qDebug() << "map_yaml_file_path: " << filePath;
-                            map_yaml_file_path_list.push_back(filePath.toStdString());
+                            map_yaml_file_path_list.push_back(map_filePath.toStdString());
+
+                            //qDebug() << j;            
+                            //qDebug() << "map_yaml_file_path: " << map_filePath;   
                         }
                         else if (QString::fromStdString(subNestedKey) == "room_id")
                         {   
@@ -212,11 +223,12 @@ namespace nav2routes_datapanel
                             std::string routes_name = it_routes.key();
                             nlohmann::json routes_id = it_routes.value();
 
-                            //QString room_id = QString::fromStdString(subNestedValue.dump());
+                            QString room_id = QString::fromStdString(subNestedValue.dump());
                             //routes_id.remove(0, 1);            
                             //routes_id.chop(1);
-                            // std::string string = getElementAtIndex(room_yaml_file_path_list,j);
-                            // display_routes_map[i][j][k] = {"s", std::string(routes_id.dump())};
+                            //std::string string = getElementAtIndex(room_yaml_file_path_list,j);
+                            //qDebug() << QString::fromStdString(string);
+                            //display_routes_map[i][j][k] = {"s", std::string(routes_id.dump())};
                             routes.append(QString::fromStdString(routes_name)); 
 
                             //qDebug() << "routes_name: " << QString::fromStdString(routes_name);
@@ -224,12 +236,23 @@ namespace nav2routes_datapanel
                             k++;
                             }
                             routes_map[i][j] = routes;
+                            // qDebug() << j;            
+                            // qDebug() << "room_yaml_file_path: " << filePath;
                                         
                         } 
                             
                         } // level 3 
                         //int numStringLists = vector_routes.size();
                         //qDebug() << "Numero di QStringList nel vettore: " << numStringLists;
+                        room_path_map[i][j] = filePath.toStdString(); 
+                        map_path_map[i][j] = map_filePath.toStdString();
+
+                        //qDebug() << j;            
+                        //qDebug() << "room_file_path: " << filePath;  
+
+                        //qDebug() << j;            
+                        //qDebug() << "map_yaml_file_path: " << map_filePath;                        
+
                     j++;       
                     } //level 2
                     //vector_rooms.push_back(rooms);
@@ -237,7 +260,10 @@ namespace nav2routes_datapanel
                 i++;
                 } //level 1
                  
-                
+                set_map = map_path_map[0][0];
+                qDebug() << QString::fromStdString(set_map); 
+                //loadMap(setmap);
+
                 //initialization drop-down menus 
                 //Populates hospitals drop-down menu
                 hospital_dropdown_->clear();
@@ -298,67 +324,54 @@ namespace nav2routes_datapanel
 
 // this function displays the rooms related the selected hospital //
 void Nav2routesDataPanel::loadMap(std::string path)
-  {           
-    auto client_load_map_node = rclcpp::Node::make_shared("nav2_routes_load_map_client");
-    auto service_client_load_map = client_load_map_node->create_client<nav2_msgs::srv::LoadMap>("/map_server/load_map");
-    // Create the request
+{           
     auto request_load_map = std::make_shared<nav2_msgs::srv::LoadMap::Request>();
-    // Set the map URL
-    request_load_map->map_url = "/home/user/ros2_ws/src/nav2routes_datamanager/config/site_data/sites/st_james/demo/demo.yaml";
+    request_load_map->map_url = set_map;
+    // When the server responds the following function is executed //
+    auto response_received = [](rclcpp::Client<nav2_msgs::srv::LoadMap>::SharedFuture future) 
+    {
+        auto response = future.get();
+        if (response->result == nav2_msgs::srv::LoadMap::Response::RESULT_SUCCESS) 
+        {
+            qDebug() << "Map successfully displayed";
+        } 
+        else 
+        {
+            qDebug() << "Map not found";
+        }
+    };
 
-    // Send the request
-    
+    // this block sends the request to server and waits the answer //
     auto future = service_client_load_map->async_send_request(request_load_map);
-     
-    // Wait for the response
-    auto result = future.wait_for(std::chrono::seconds(15));
-    if (result == std::future_status::timeout)
-    {
-    qDebug() <<"Service call timed out.";
-      
-    }
+    rclcpp::spin_until_future_complete(client_load_map_node, future, std::chrono::seconds(5));
 
-    // Process the response
-    auto response = future.get();
-    if (response->result == nav2_msgs::srv::LoadMap::Response::RESULT_SUCCESS)
+    // Response received managing
+    if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) 
     {
-      qDebug() << "Map loaded successfully.";
-      // Process the loaded map data if needed
-    }
-    else
+        response_received(std::move(future));
+    } 
+    else 
     {
-      //RCLCPP_ERROR(get_logger(), "Failed to load the map. Result code");
-    }
-  
-
+        qDebug() << "Service call timed out";
+    }  
+        
 
 
 } // loadMap
 
 
-std::string Nav2routesDataPanel::getElementAtIndex(const std::list<std::string>& myList, int index) 
-{
-    int i = 0;
-    // iteration
-    for (const auto& element : myList) 
-    {
-        if (i == index) {
-            return element;
-        }
-        i++;
-    }
-    // index out of the list
-    throw std::out_of_range("index out of the list");
-}
-
 // this function displays the rooms related the selected hospital //
 void Nav2routesDataPanel::onHospitalChanged(int index)
 {      
     hindex = hospital_dropdown_->currentIndex(); 
+    //rindex = room_dropdown_->currentIndex(); 
     room_dropdown_->clear();
     room_dropdown_->addItems(rooms_map[hindex]);
     route_dropdown_->clear();
-    route_dropdown_->addItems(routes_map[hindex][0]);      
+    route_dropdown_->addItems(routes_map[hindex][0]);   
+    set_map = map_path_map[hindex][0];
+    this->loadMap(set_map);
+    //qDebug() << QString::fromStdString(set_map);
 }
 
 // this function displays the rooms related the selected hospital //
@@ -367,20 +380,25 @@ void Nav2routesDataPanel::onRoomChanged(int index)
     hindex = hospital_dropdown_->currentIndex();
     rindex = room_dropdown_->currentIndex();
     route_dropdown_->clear();
-    route_dropdown_->addItems(routes_map[hindex][rindex]);     
+    route_dropdown_->addItems(routes_map[hindex][rindex]); 
+    set_map = map_path_map[hindex][rindex];
+    this->loadMap(set_map);
+    //qDebug() << QString::fromStdString(set_map);
 }
 
 void Nav2routesDataPanel::onRouteChanged(int index)
 {
-hindex = hospital_dropdown_->currentIndex(); 
-rindex = room_dropdown_->currentIndex();
-roindex = route_dropdown_->currentIndex();
-std::list<std::string> list = display_routes_map[hindex][rindex][roindex];
-std::string room_file_path = list.front();
-std::string route_it = list.back();
+    hindex = hospital_dropdown_->currentIndex(); 
+    rindex = room_dropdown_->currentIndex();
+    roindex = route_dropdown_->currentIndex();
+
+    set_room = room_path_map[hindex][rindex];
+    set_route_id = roindex;
+
+    //qDebug() << QString::fromStdString(set_room);
+    //qDebug() << roindex;
 }
 
-   
 }  // namespace navroutes_panel
 
 
