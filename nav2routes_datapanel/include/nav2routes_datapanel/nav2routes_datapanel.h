@@ -97,6 +97,7 @@ namespace nav2routes_datapanel
             void initializeComboBoxes();
             //std::string getElementAtIndex(const std::list<std::string>& myList, int index);
             void loadMap(std::string path);
+            void DisplayRoute(std::string set_room, int set_route_id);
                         
             //std::shared_ptr<custom_interfaces::srv::NavroutesServiceMessage::Request> request_routes;
             custom_interfaces::srv::NavroutesServiceMessage::Request::SharedPtr request_routes;

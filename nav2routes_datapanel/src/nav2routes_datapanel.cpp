@@ -12,6 +12,7 @@
 #include <QInputDialog>
 #include <QComboBox>
 #include <QStringList>
+#include <set>
 #include <sstream>
 //#include <String>
 
@@ -76,51 +77,17 @@ namespace nav2routes_datapanel
         // ***********  display routes *************//
         // *****************************************//
 
+        client_route_display = rclcpp::Node::make_shared("nav2routes_datadisplay_client");
+        service_client_route_display = client_route_display->create_client<custom_interfaces::srv::NavroutesServiceMessage>("nav2routes_datadisplay_server");
+
         pushbutton->connect(pushbutton, &QPushButton::clicked, [=]() 
         {
-       
-            // clicking the button, the client calls the server //
-            auto request_routes = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();  
-            onRouteChanged(1);  
-            request_routes->room = set_room;        
-            request_routes->route = set_route_id;
-            auto client_route_display = rclcpp::Node::make_shared("nav2routes_datadisplay_client");
-            auto service_client_route_display = client_route_display->create_client<custom_interfaces::srv::NavroutesServiceMessage>(
-                "nav2routes_datadisplay_server");
-        
-            // When the server responds the following function is executed //
-            auto response_received = [](rclcpp::Client<custom_interfaces::srv::NavroutesServiceMessage>::SharedFuture future) 
-            {
-                auto response = future.get();
-                if (response->success) 
-                {
-                    qDebug() << "Route successfully displayed";
-                } 
-                else 
-                {
-                    qDebug() << "Route not found";
-                }
-            };
-
-            // this block sends the request to server and waits the answer //
-            auto future = service_client_route_display->async_send_request(request_routes);
-            rclcpp::spin_until_future_complete(client_route_display, future, std::chrono::seconds(5));
-
-            // Response received managing
-            if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) 
-            {
-                response_received(std::move(future));
-            } 
-            else 
-            {
-                qDebug() << "Service call timed out";
-            }  
-                qDebug() << "Button pushed!";
-                //qDebug() << lineEdit_route->text().toInt();
+            onRouteChanged(1); 
+            DisplayRoute(set_room, set_route_id);             
         });
 
-
     }
+
 
     void Nav2routesDataPanel::onInitialize()
   {
@@ -259,13 +226,11 @@ namespace nav2routes_datapanel
                     rooms_map[i] = QStringList() << rooms; 
                 i++;
                 } //level 1
-                 
-                set_map = map_path_map[0][0];
-                qDebug() << QString::fromStdString(set_map); 
-                //loadMap(setmap);
 
                 //initialization drop-down menus 
                 //Populates hospitals drop-down menu
+                // display map and route
+
                 hospital_dropdown_->clear();
                 hospital_dropdown_->addItems(hospitals);
 
@@ -273,7 +238,14 @@ namespace nav2routes_datapanel
                 room_dropdown_->addItems(rooms_map[0]);
 
                 route_dropdown_->clear();
-                route_dropdown_->addItems(routes_map[0][0]);            
+                route_dropdown_->addItems(routes_map[0][0]);   
+
+                set_map = map_path_map[0][0];
+                loadMap(set_map);
+                set_room = room_path_map[0][0];
+                set_route_id = 0;
+                DisplayRoute(set_room, set_route_id);
+
 
                 // Connect the signals to the corresponding slots                
                 connect(hospital_dropdown_, QOverload<int>::of(&QComboBox::activated), this, [=](int index)
@@ -292,12 +264,9 @@ namespace nav2routes_datapanel
                 {
                     onRouteChanged(index);
                     //qDebug() << "calling connect...onRoomChanged";
-                });
+                });              
                 
-                
-                
-               //loadMap("/home/user/ros2_ws/src/nav2routes_datamanager/config/site_data/sites/st_james/demo/demo.yaml");
-                 
+                    
             } 
             else
             {
@@ -353,11 +322,50 @@ void Nav2routesDataPanel::loadMap(std::string path)
     else 
     {
         qDebug() << "Service call timed out";
-    }  
-        
-
+    }         
 
 } // loadMap
+
+
+    void Nav2routesDataPanel::DisplayRoute(std::string set_room, int set_route_id)
+    {       
+            // clicking the button, the client calls the server //
+            request_routes = std::make_shared<custom_interfaces::srv::NavroutesServiceMessage::Request>();  
+            request_routes->room = set_room;        
+            request_routes->route = set_route_id;
+            //auto client_route_display = rclcpp::Node::make_shared("nav2routes_datadisplay_client");
+            //auto service_client_route_display = client_route_display->create_client<custom_interfaces::srv::NavroutesServiceMessage>(
+             ///   "nav2routes_datadisplay_server");
+        
+            // When the server responds the following function is executed //
+            auto response_received = [](rclcpp::Client<custom_interfaces::srv::NavroutesServiceMessage>::SharedFuture future) 
+            {
+                auto response = future.get();
+                if (response->success) 
+                {
+                    qDebug() << "Route successfully displayed";
+                } 
+                else 
+                {
+                    qDebug() << "Route not found";
+                }
+            };
+
+            // this block sends the request to server and waits the answer //
+            auto future = service_client_route_display->async_send_request(request_routes);
+            rclcpp::spin_until_future_complete(client_route_display, future, std::chrono::seconds(5));
+
+            // Response received managing
+            if (future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) 
+            {
+                response_received(std::move(future));
+            } 
+            else 
+            {
+                qDebug() << "Service call timed out";
+            } 
+    }
+
 
 
 // this function displays the rooms related the selected hospital //
@@ -370,8 +378,10 @@ void Nav2routesDataPanel::onHospitalChanged(int index)
     route_dropdown_->clear();
     route_dropdown_->addItems(routes_map[hindex][0]);   
     set_map = map_path_map[hindex][0];
-    this->loadMap(set_map);
-    //qDebug() << QString::fromStdString(set_map);
+    loadMap(set_map);
+    set_room = room_path_map[hindex][0];
+    set_route_id = 0;
+    DisplayRoute(set_room, set_route_id);
 }
 
 // this function displays the rooms related the selected hospital //
@@ -382,8 +392,10 @@ void Nav2routesDataPanel::onRoomChanged(int index)
     route_dropdown_->clear();
     route_dropdown_->addItems(routes_map[hindex][rindex]); 
     set_map = map_path_map[hindex][rindex];
-    this->loadMap(set_map);
-    //qDebug() << QString::fromStdString(set_map);
+    loadMap(set_map);
+    set_room = room_path_map[hindex][rindex];
+    set_route_id = 0;
+    DisplayRoute(set_room, set_route_id);
 }
 
 void Nav2routesDataPanel::onRouteChanged(int index)
