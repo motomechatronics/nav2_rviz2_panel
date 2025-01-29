@@ -144,10 +144,10 @@ Open a terminal and type
 
 ```python
 cd ~/ros2_ws/src
-git clone https://github.com/motomechatronics/Rviz2_panel_for_Autonomous_Mobile_Robot_Applications.git
+git clone https://github.com/motomechatronics/nav2_rivz2_panel.git
 cd ..
 colcon build
-source /opt/ros/humble/setup.bash
+source /opt/ros/galactic/setup.bash
 ```
 
 If you not have the tf-transformations installed, type
@@ -155,7 +155,7 @@ If you not have the tf-transformations installed, type
 
 ```python
 sudo pip3 install transforms3d
-sudo apt install ros-humble-tf-transformations
+sudo apt install ros-galactic-tf-transformations
 ```
 
 ### 5. Usage
